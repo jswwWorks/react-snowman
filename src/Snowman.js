@@ -76,11 +76,12 @@ function Snowman({
   return (
       <div className="Snowman">
         <img src={(images)[nWrong]} alt={nWrong} />
+        <p>{`Number of incorrect guesses so far: ${nWrong}`}</p>
         <p className="Snowman-word">{guessedWord()}</p>
         <p>{generateButtons()}</p>
       </div>
   );
 }
-
+// TODO: alter alt tag to be a bit more helpful for accessibility?
 
 export default Snowman;
