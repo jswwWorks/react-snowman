@@ -11,6 +11,16 @@ import img5 from "./5.png";
 import img6 from "./6.png";
 
 
+describe('smoke test', function() {
+  test('image is present', function() {
+    render(
+      <Snowman />
+    )
+    expect(container.querySelector('img')).toBeInTheDocument();
+  });
+});
+
+
 describe("Snowman component functionality", function () {
 
   test("Image should display even after 6 wrong guesses are made", function () {
@@ -25,19 +35,21 @@ describe("Snowman component functionality", function () {
         maxWrong={ 6 }/>
     );
 
+    const letterB = container.querySelector('#b');
+    const letterC = container.querySelector('#c');
+    const letterD = container.querySelector('#d');
+    const letterF = container.querySelector('#f');
+    const letterG = container.querySelector('#g');
+    const letterX = container.querySelector('#x');
 
-    // check whether HTML contains an image
-    // check whether HTML contains an alt tag (our snowman images all have
-    // alt tags & for accessibility all images should have alt tags so this
-    // seems reasonable)
+    fireEvent.click(letterB);
+    fireEvent.click(letterC);
+    fireEvent.click(letterD);
+    fireEvent.click(letterF);
+    fireEvent.click(letterG);
+    fireEvent.click(letterX);
 
-    // Check whether image is in the document
-    expect(
-      container.querySelector("img")
-    ).toBeInTheDocument();
-
-
+    expect(container.querySelector('button')).not.toBeInTheDocument();
+    expect(container.querySelector("img")).toBeInTheDocument();
   })
-
-
 })

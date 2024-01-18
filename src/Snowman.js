@@ -63,6 +63,7 @@ function Snowman({
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
         <button
+            class='letter'
             key={ltr}
             value={ltr}
             onClick={handleGuess}
