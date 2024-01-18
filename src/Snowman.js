@@ -39,7 +39,7 @@ import { randomWord, ENGLISH_WORDS } from './words';
 
 function Snowman({
       images=[img0, img1, img2, img3, img4, img5, img6],
-      words=[randomWord(ENGLISH_WORDS)],
+      words=[randomWord(ENGLISH_WORDS)], // TODO: feed in all the words
       maxWrong=6,
     }) {
   /** by default, allow 6 guesses and use provided gallows images. */
@@ -49,13 +49,16 @@ function Snowman({
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
   const [answer, setAnswer] = useState((words)[0]);
+  // TODO: this is where you pull in the random word
 
   /** resetSnowman: reverts all states to their initial state,
    *  forces page re-render to start game again
    */
   function resetSnowman() {
     setNWrong(0);
-    setGuessedLetters(() => new Set());
+    setGuessedLetters(() => new Set()); // only pass in callback functions
+    // when we care about what the state was before (we could just say
+    // 'new Set()' here and that'd be perfectly good)
     setAnswer(randomWord(ENGLISH_WORDS));
   }
 
@@ -105,7 +108,9 @@ function Snowman({
   //   return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
   //     <LetterButton letter={ ltr } disabled={ guessedLetters.has(ltr) } />
   //   ));
-  // }
+  // } // only do that if each button was going to do something way crazy
+  // don't make a new element if the html rendering does everything you need
+  // in this case, we don't need anymore than what we get with the HTML
 
   return (
       <div className="Snowman">
@@ -126,4 +131,6 @@ function Snowman({
   );
 }
 
+// add more details to the alt tag -- make it more descriptive
+// # guesses left & mention snowman
 export default Snowman;

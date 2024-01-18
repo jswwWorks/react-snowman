@@ -29,5 +29,6 @@ function LetterButton({ letter, disabled }) {
   );
 }
 
-// disabled={guessedLetters.has(ltr)} // would this work? or should it be what
+// disabled={guessedLetters.has(ltr)}
+// would this work? or should it be what
 // we have here

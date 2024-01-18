@@ -89,3 +89,5 @@ describe("Snowman component functionality", function () {
     expect(container.querySelector("img")).toBeInTheDocument();
   });
 })
+
+// TODO: check out solution for more ideas of how to test
