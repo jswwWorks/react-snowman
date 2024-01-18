@@ -30,6 +30,8 @@ function Snowman({
     }) {
   /** by default, allow 6 guesses and use provided gallows images. */
 
+  const maxGuesses = maxWrong;
+
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
   const [answer, setAnswer] = useState((words)[0]);
@@ -63,9 +65,10 @@ function Snowman({
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
         <button
-            class='letter'
+            className='letter'
             key={ltr}
             value={ltr}
+            id={ltr}
             onClick={handleGuess}
             disabled={guessedLetters.has(ltr)}
         >
@@ -79,7 +82,14 @@ function Snowman({
         <img src={(images)[nWrong]} alt={nWrong} />
         <p>{`Number of incorrect guesses so far: ${nWrong}`}</p>
         <p className="Snowman-word">{guessedWord()}</p>
-        <p>{generateButtons()}</p>
+
+        {nWrong !== maxGuesses &&
+         <p>{generateButtons()}</p>
+        }
+
+        {nWrong === maxGuesses &&
+          <p>{`You lose. Correct word: ${answer}`}</p>
+        }
       </div>
   );
 }

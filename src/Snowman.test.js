@@ -13,12 +13,45 @@ import img6 from "./6.png";
 
 describe('smoke test', function() {
   test('image is present', function() {
-    render(
+
+    const { container } = render(
       <Snowman />
-    )
+    );
+
     expect(container.querySelector('img')).toBeInTheDocument();
   });
 });
+
+describe('snapshot test for working loss display', function() {
+  test('properly renders when someone has lost game', function() {
+
+    const { container } = render(
+      <Snowman
+        images={ [img0, img1, img2, img3, img4, img5, img6] }
+        words={ ["apple"] }
+        maxWrong={ 6 }/>
+    );
+
+    const letterB = container.querySelector('#b');
+    const letterC = container.querySelector('#c');
+    const letterD = container.querySelector('#d');
+    const letterF = container.querySelector('#f');
+    const letterG = container.querySelector('#g');
+    const letterX = container.querySelector('#x');
+
+    fireEvent.click(letterB);
+    fireEvent.click(letterC);
+    fireEvent.click(letterD);
+    fireEvent.click(letterF);
+    fireEvent.click(letterG);
+    fireEvent.click(letterX);
+
+    expect(container.querySelector('button')).not.toBeInTheDocument();
+    expect(container.querySelector("img")).toBeInTheDocument();
+
+    expect(container).toMatchSnapshot();
+  });
+})
 
 
 describe("Snowman component functionality", function () {
@@ -51,5 +84,5 @@ describe("Snowman component functionality", function () {
 
     expect(container.querySelector('button')).not.toBeInTheDocument();
     expect(container.querySelector("img")).toBeInTheDocument();
-  })
+  });
 })
