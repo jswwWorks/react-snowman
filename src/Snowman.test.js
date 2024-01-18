@@ -46,7 +46,7 @@ describe('snapshot test for working loss display', function() {
     fireEvent.click(letterG);
     fireEvent.click(letterX);
 
-    expect(container.querySelector('button')).not.toBeInTheDocument();
+    expect(container.querySelector('.letter')).not.toBeInTheDocument();
     expect(container.querySelector("img")).toBeInTheDocument();
 
     expect(container).toMatchSnapshot();
@@ -58,8 +58,7 @@ describe("Snowman component functionality", function () {
 
   test("Image should display even after 6 wrong guesses are made", function () {
 
-    // make a snowman game that has 7 wrong guesses
-    // query select for an image
+    // make a snowman game that has 6 wrong guesses
 
     const { container } = render(
       <Snowman
@@ -82,7 +81,11 @@ describe("Snowman component functionality", function () {
     fireEvent.click(letterG);
     fireEvent.click(letterX);
 
-    expect(container.querySelector('button')).not.toBeInTheDocument();
+
+    // make sure none of the buttons with the class 'letter' appear
+    expect(container.querySelector('.letter')).not.toBeInTheDocument();
+
+    // make sure the image still remains (before it disappeared)
     expect(container.querySelector("img")).toBeInTheDocument();
   });
 })

@@ -11,7 +11,17 @@ import img6 from "./6.png";
 
 import { randomWord, ENGLISH_WORDS } from './words';
 
+// Questions:
 
+// reset the game -- is there a way to just rerender the component,
+// or should we just revert the states (like we did) back to initial states?
+
+
+// TODO: decompose component (remove unnecessary parts)
+
+// Parts to decompose:
+// generateButtons function (make each button its own component and pass in a
+// letter)
 
 
 /** Snowman game: plays hangman-style game with a melting snowman.
@@ -40,8 +50,13 @@ function Snowman({
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
   const [answer, setAnswer] = useState((words)[0]);
 
+  /** resetSnowman: reverts all states to their initial state,
+   *  forces page re-render to start game again
+   */
   function resetSnowman() {
-
+    setNWrong(0);
+    setGuessedLetters(() => new Set());
+    setAnswer(randomWord(ENGLISH_WORDS));
   }
 
   /** guessedWord: show current-state of word:
@@ -85,6 +100,13 @@ function Snowman({
     ));
   }
 
+  // In-progress decomposition
+  // function generateButtons() {
+  //   return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
+  //     <LetterButton letter={ ltr } disabled={ guessedLetters.has(ltr) } />
+  //   ));
+  // }
+
   return (
       <div className="Snowman">
         <img src={(images)[nWrong]} alt={nWrong} />
@@ -95,11 +117,7 @@ function Snowman({
          <p>{generateButtons()}</p>
         }
 
-        {/* <button onClick= {<Snowman=({images=[img0, img1, img2, img3, img4, img5, img6],
-      words=[randomWord(ENGLISH_WORDS)]
-      maxWrong=6}) />} reset </button> */}
-
-      <button onClick={<Snowman />}> Reset </button>
+      <button onClick={resetSnowman}> Reset </button>
 
         {nWrong === maxGuesses &&
           <p>{`You lose. Correct word: ${answer}`}</p>
@@ -107,6 +125,5 @@ function Snowman({
       </div>
   );
 }
-// TODO: alter alt tag to be a bit more helpful for accessibility?
 
 export default Snowman;

@@ -21,6 +21,9 @@ exports[`snapshot test for working loss display properly renders when someone ha
       _
       _
     </p>
+    <button>
+       Reset 
+    </button>
     <p>
       You lose. Correct word: apple
     </p>
