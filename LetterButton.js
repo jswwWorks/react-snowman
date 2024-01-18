@@ -24,7 +24,7 @@ function LetterButton({ letter, disabled }) {
     id={letter}
     onClick={handleGuess} // would this work?
     disabled={disabled}>
-    {ltr}
+    {letter}
     </button>
   );
 }
